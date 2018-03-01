@@ -4,7 +4,6 @@ Adafruit_APDS9960 apds;
 
 int planettype;
 int pos;
-int servoa;
 Servo myservo;  // create servo object to control a servo
 
 
@@ -18,7 +17,6 @@ void setup() {
   // enable color sensing mode
   apds.enableColor(true);
   myservo.attach(9);  // attaches the servo on pin 9 to the servo object
-  servoa = 0;
 }
 
 void loop() {
@@ -105,6 +103,7 @@ void loop() {
 
 void move_servo(){
   if (planettype == 3) {
+    delay (6000)
       for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
       // in steps of 1 degree
       myservo.write(pos);       // tell servo to go to position in variable 'pos'
