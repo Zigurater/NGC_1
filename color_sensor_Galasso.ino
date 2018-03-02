@@ -56,6 +56,7 @@ void loop() {
     if((r > 140) && (b < 400) && (g <165)) {
       planettype = 3;
       }
+/*
    if((g > 999) && (r < 999) && (b < 999)){
       planettype = 4;
       }
@@ -65,8 +66,9 @@ void loop() {
     if((r > 999) && (b > 999) && (g > 999)) {
       planettype = 6;
       }
+*/
 // Second Version of display for the planet color
-
+/*
   switch(planettype){ //Each line will check for a different case of the variable planttype and display based on that value
     case 1:Serial.println("Green/Habitable Planet");
     case 2:Serial.println("Blue/Gas Giant");
@@ -74,9 +76,9 @@ void loop() {
     case 4:Serial.println("Yellow Planet");
     case 5:Serial.println("Magenta Planet");
     case 6:Serial.println("Cyan Planet");
-    
-  }
-/*
+*/  
+ 
+
     // First version of display for the planet color
      if(planettype == 1){
       Serial.println("Green/Habitable Planet");
@@ -96,7 +98,7 @@ void loop() {
     if(planettype == 6) {
       Serial.println("Cyan Planet");
       }
-*/
+
 
   delay(150);
 
@@ -105,7 +107,7 @@ void loop() {
 
 void move_servo(){
   if (planettype == 3) {
-    delay (6000)
+    delay (1000);
       for (pos = 0; pos <= 180; pos += 1) { // goes from 0 degrees to 180 degrees
       // in steps of 1 degree
       myservo.write(pos);       // tell servo to go to position in variable 'pos'
