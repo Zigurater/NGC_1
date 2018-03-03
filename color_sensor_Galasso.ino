@@ -7,8 +7,7 @@ int pos;
 int F;
 bool moving;
 bool pulsar_value;
-Servo myservo;  // create servo object to control a servo
-
+Servo myservo;  // create servo object to control a servo'
 
 void setup() {
     Serial.begin(115200);
@@ -117,16 +116,20 @@ void loop() {
 
   move_servo(); // call this method to move the servo 180 degrees. It will check for the magma planet on its own.
 }
-if (!moving)
 void move_servo(){
+  while (!moving){
   if (planettype == 3) {
     pos = 180;
     delay (1000);
       for (pos = 180; pos >= 0; pos -= 1) { // goes from 0 degrees to 180 degrees
       // in steps of 1 degree
       myservo.write(pos);       // tell servo to go to position in variable 'pos'
-      delay(10);             // waits 15ms for the servo to reach the position
+      delay(10);
+      }     
       }
+  if (moving){
+    break;
+  }
   }
 }
 // End of RGB code
