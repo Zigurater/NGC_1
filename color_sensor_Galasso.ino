@@ -4,6 +4,9 @@ Adafruit_APDS9960 apds;
 
 int planettype;
 int pos;
+int F;
+bool moving;
+bool pulsar_value;
 Servo myservo;  // create servo object to control a servo
 
 
@@ -17,9 +20,13 @@ void setup() {
   // enable color sensing mode
   apds.enableColor(true);
   myservo.attach(9);  // attaches the servo on pin 9 to the servo object
+  moving = false;
+  pulsar_value = wait_for_on;
 }
-
 void loop() {
+  if (){
+    moving = true
+  }
     // create some variables to store the color data in
     uint16_t r, g, b, c;
     
@@ -66,9 +73,15 @@ void loop() {
     if((r > 999) && (b > 999) && (g > 999)) {
       planettype = 6;
       }
+
+    if((g > 800) && (r > 800) && (b > 800)) {
+      plusar();
+      planettype = 7;
+  }
 */
+
 // Second Version of display for the planet color
-/*
+
   switch(planettype){ //Each line will check for a different case of the variable planttype and display based on that value
     case 1:Serial.println("Green/Habitable Planet");
     case 2:Serial.println("Blue/Gas Giant");
@@ -76,9 +89,9 @@ void loop() {
     case 4:Serial.println("Yellow Planet");
     case 5:Serial.println("Magenta Planet");
     case 6:Serial.println("Cyan Planet");
-*/  
- 
-
+    case 7:Serial.println("Plusar with a frequency of" F)
+}
+/*
     // First version of display for the planet color
      if(planettype == 1){
       Serial.println("Green/Habitable Planet");
@@ -98,13 +111,13 @@ void loop() {
     if(planettype == 6) {
       Serial.println("Cyan Planet");
       }
-
+*/
 
   delay(150);
 
   move_servo(); // call this method to move the servo 180 degrees. It will check for the magma planet on its own.
 }
-
+if (!moving)
 void move_servo(){
   if (planettype == 3) {
     pos = 180;
@@ -117,4 +130,30 @@ void move_servo(){
   }
 }
 // End of RGB code
+
 // Start of Pulsar Code
+
+// What the Pulsar code needs to do
+// 1) Read bright white light values
+// 2) When a certain value is read start a timer (ex. start timer when light value = 800)
+// 3) End that timer when that value is read again
+// 4) Start a second timer when step 3 happens
+// 5) End that timer when that value is reached again
+// 6) Repeat steps 1-5 for multiple trials and store these values has interger variables
+// 7) Add up values from first timer and divide by number of trials
+// 8) Add up values from second timer and divide by number of trials
+// 9) Add up these averages
+// 10) Divide 1 by that value to obtain frequency
+
+void plusar(){
+  while (!moving){
+    wait_for_on()
+    if (pulsar_value){
+      //write time value to something
+      wait_for_off()
+    }
+    if (moving){
+      break;
+    }
+    }
+    }
