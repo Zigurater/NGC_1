@@ -20,7 +20,7 @@ void setup() {
   apds.enableColor(true);
   myservo.attach(9);  // attaches the servo on pin 9 to the servo object
   moving = false;
-  pulsar_value = wait_for_on;
+  pulsar_value = wait_for_on; // What is this line supposed to do? Wait_For_On was declared as a method in the bottom. Were you intending for wait_for_one to return a boolean? You'll want to include a "()" in there if it is. -AR
 }
 void loop() {
   if (){
@@ -152,11 +152,11 @@ void move_servo(){
 void plusar(){
   while (!moving){
     if (planettype == 7){
-    wait_for_on()
+    wait_for_on() // Where is this method defined? -AR
     }
     if (pulsar_value){
       //write time value to something
-      wait_for_off()
+      wait_for_off() // Where is this method defined? -AR
     }
     if (moving){
       break;
