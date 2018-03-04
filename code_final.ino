@@ -112,7 +112,7 @@ void loop() {
       }
 */
 
-  delay(150);
+  delay(500);
 
   move_servo(); // call this method to move the servo 180 degrees. It will check for the magma planet on its own.
   plusar(); // call this to calculate the frequency of the pulsar.
@@ -125,7 +125,7 @@ void move_servo(){
       for (pos = 180; pos >= 0; pos -= 1) { // goes from 0 degrees to 180 degrees
       // in steps of 1 degree
       myservo.write(pos);       // tell servo to go to position in variable 'pos'
-      delay(10);
+      delay(8);
       }     
       }
   if (moving){

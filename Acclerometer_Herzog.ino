@@ -15,6 +15,7 @@
  int xAcc;
  int yAcc;
  int zAcc;
+ bool moving;
  
  int zero = 282;//this was the zero point value for my accelerometer, your board may be slightly different.  see the comment below for calculating this with your own board.
 
@@ -36,24 +37,29 @@ void loop(){
   the xAcc and yAcc values will hover around a common value, 
   this is your "zero" value.  Change the value of the variable "zero" above.
   **/
-//  //print values
-//  Serial.print("xAcc ");
-//  Serial.println(xAcc);
-//  Serial.print("yAcc ");
-//  Serial.println(yAcc);
-//  Serial.print("zAcc ");
-//  Serial.println(zAcc);
-//  Serial.println(" ");
-//  delay(500);//wait
+//print values
+Serial.print("xAcc ");
+Serial.println(xAcc);
+Serial.print("yAcc ");
+Serial.println(yAcc);
+Serial.print("zAcc ");
+Serial.println(zAcc);
+Serial.println(" ");
+delay(500);//wait
   
   //print values
-  Serial.print("xAcc ");
-  Serial.println(zero-xAcc);
-  Serial.print("yAcc ");
-  Serial.println(zero-yAcc);
-  Serial.print("zAcc ");
-  Serial.println(zero-zAcc);
-  Serial.println(" ");
-  delay(500);//wait
-
+//Serial.print("xAcc ");
+//Serial.println(zero-xAcc);
+//Serial.print("yAcc ");
+//Serial.println(zero-yAcc);
+//Serial.print("zAcc ");
+//Serial.println(zero-zAcc);
+//Serial.println(" ");
+//delay(500);//wait
+if (zAcc != zero){
+  moving = true
+}
+if (zAcc = zero){
+  moving = false
+}
 }
