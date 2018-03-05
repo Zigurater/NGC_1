@@ -86,7 +86,7 @@ void loop() {
     case 4:Serial.println("Yellow Planet");
     case 5:Serial.println("Magenta Planet");
     case 6:Serial.println("Cyan Planet");
-//case 7:Serial.println("Plusar with a frequency of" (F))
+	 case 7:Serial.println("Plusar with a frequency of" (F));
 }
 */
 
@@ -119,7 +119,7 @@ void loop() {
 void move_servo(){
   if (planettype == 3) {
     delay (1000);
-      for (pos = 180; pos >= 0; pos -= 1) { // goes from 0 degrees to 180 degrees
+      for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
       // in steps of 1 degree
       myservo.write(pos);       // tell servo to go to position in variable 'pos'
       delay(8);
