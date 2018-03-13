@@ -1,5 +1,5 @@
 #include <Servo.h>
-int pos;
+int pos = 180;
 int planettype = 3;
 Servo myservo;  // create servo object to control a servo'
 
