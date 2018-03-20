@@ -35,7 +35,7 @@ void loop() {
     // get the data and print the different channels
 
     apds.getColorData(&r, &g, &b, &c);
-/*
+
     Serial.print("red: ");
     Serial.print(r);
     
@@ -48,15 +48,17 @@ void loop() {
     Serial.print(" clear: ");
     Serial.println(c);
     Serial.println();
-*/
+
 // Values tested with Chris' phone at full brightness with colored folders
 
-    if((g > 40) && (r < 370) && (b < 150)){ // These lines check the light values and sets a variable to a value based on the light values
+    if((55 < g < 60) && (6 < r < 11) && (40 < b < 45) && (98 < c < 103)){ // These lines check the light values and sets a variable to a value based on the light values
       planettype = 1;
       }
-    if((b > 25) && (r < 370) && (g < 165)) {
+
+    if((2 < r < 7) && (32 < g < 37) && (111 < b < 116) && (141 < c < 146)) {
       planettype = 2;
       }
+  /*
     if((r > 140) && (b < 400) && (g <165)) {
       planettype = 3;
       }
@@ -96,7 +98,7 @@ void loop() {
       }
     if(planettype == 2) {
       Serial.println("Blue/Gas Giant");
-      }
+      }/*
     if(planettype == 3) {
       Serial.println("Red/Magama Planet");
       }
