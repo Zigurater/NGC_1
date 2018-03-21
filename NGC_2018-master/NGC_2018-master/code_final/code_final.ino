@@ -51,28 +51,28 @@ void loop() {
 
 // Values tested with Chris' phone at full brightness with colored folders
 
-    if((g <= 60 && g >= 51) && (r <= 11 && r >= 5) && (b <= 45 && b >= 36) && (c <= 100 && c >= 89)){ // These lines check the light values and sets a variable to a value based on the light values
+    if((55 < g < 60) && (6 < r < 11) && (40 < b < 45) && (98 < c < 103)){ // These lines check the light values and sets a variable to a value based on the light values
       planettype = 1;
       }
 
-    if((g <= 40 && g >= 28) && (r <= 10 && r >= 2) && (b <= 120 && b >= 101) && (c <= 150 && c >= 130)){
+    if((2 < r < 7) && (32 < g < 37) && (111 < b < 116) && (141 < c < 146)) {
       planettype = 2;
       }
-  
-    if((g <= 20 && g >= 3) && (r <= 70 && r >= 52) && (b <= 20 && b >= 8) && (c <= 65 && c >= 50)){
+  /*
+    if((r > 140) && (b < 400) && (g <165)) {
       planettype = 3;
       }
-
-   if((g <= 60 && g >= 51) && (r <= 60 && r >= 51) && (b <= 55 && b >= 40) && (c <= 145 && c >= 134)){
+/*
+   if((g > 999) && (r < 999) && (b < 999)){
       planettype = 4;
       }
-    if((g <= 40 && g >= 29) && (r <= 55 && r >= 45) && (b <=105  && b >= 98) && (c <= 175 && c >= 163)) {
+    if((b > 999) && (r > 999) && (g > 999)) {
       planettype = 5;
       }
-/*    if((r > 999) && (b > 999) && (g > 999)) {
+    if((r > 999) && (b > 999) && (g > 999)) {
       planettype = 6;
       }
-/*
+
     if((g > 800) && (r > 800) && (b > 800)) {
       plusar();
       planettype = 7;
