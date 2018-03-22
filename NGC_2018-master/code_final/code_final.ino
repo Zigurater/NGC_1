@@ -51,58 +51,75 @@ void loop() {
 
 // Values tested with Chris' phone at full brightness with colored folders
 
-    if((g <= 60 && g >= 51) && (r <= 11 && r >= 5) && (b <= 45 && b >= 36) && (c <= 100 && c >= 89)){ // These lines check the light values and sets a variable to a value based on the light values
+    if((g <= 60 && g >= 45) && (r <= 11 && r >= 5) && (b <= 45 && b >= 30) && (c <= 100 && c >= 80)){ // These lines check the light values and sets a variable to a value based on the light values
       planettype = 1;
       }
-
-    if((g <= 40 && g >= 28) && (r <= 10 && r >= 2) && (b <= 120 && b >= 101) && (c <= 150 && c >= 130)){
+      
+    if((g <= 40 && g >= 28) && (r <= 10 && r >= 2) && (b <= 120 && b >= 90) && (c <= 150 && c >= 110)){
       planettype = 2;
       }
   
-    if((g <= 20 && g >= 3) && (r <= 70 && r >= 52) && (b <= 20 && b >= 8) && (c <= 65 && c >= 50)){
+    if((g <= 20 && g >= 3) && (r <= 70 && r >= 45) && (b <= 20 && b >= 8) && (c <= 65 && c >= 50)){
       planettype = 3;
       }
 
-   if((g <= 60 && g >= 51) && (r <= 60 && r >= 51) && (b <= 55 && b >= 40) && (c <= 145 && c >= 134)){
+   if((g <= 60 && g >= 40) && (r <= 60 && r >= 51) && (b <= 55 && b >= 35) && (c <= 145 && c >= 125)){
       planettype = 4;
       }
-    if((g <= 40 && g >= 29) && (r <= 55 && r >= 45) && (b <=105  && b >= 98) && (c <= 175 && c >= 163)) {
+      
+    if((g <= 40 && g >= 28) && (r <= 60 && r >= 45) && (b <=105  && b >= 90) && (c <= 175 && c >= 155)) {
       planettype = 5;
       }
-/*    if((r > 999) && (b > 999) && (g > 999)) {
+      
+    if((g <= 65 && g >= 52) && (r <= 16 && r >= 6) && (b <=65  && b >= 50) && (c <= 120 && c >= 105)) {
       planettype = 6;
       }
-/*
-    if((g > 800) && (r > 800) && (b > 800)) {
-      plusar();
+      
+    if((g <= 85 && g >= 65) && (r <= 65 && r >= 50) && (b <= 135  && b >= 110) && (c <= 245 && c >= 220)) {
+      //plusar();
       planettype = 7;
   }
-*/
 
 // Second Version of display for the planet color
 
-/*  switch(planettype){ //Each line will check for a different case of the variable planttype and display based on that value
-    case 1:Serial.println("Green/Habitable Planet");
-    case 2:Serial.println("Blue/Gas Giant");
-    case 3:Serial.println("Red/Magama Planet");
-    case 4:Serial.println("Yellow Planet");
-    case 5:Serial.println("Magenta Planet");
-    case 6:Serial.println("Cyan Planet");
-	 case 7:Serial.println("Plusar with a frequency of" (F));
+  switch(planettype){ //Each line will check for a different case of the variable planttype and display based on that value
+    case 1:
+      Serial.println("Green/Habitable Planet");
+      break;
+    case 2:
+      Serial.println("Blue/Gas Giant");
+      break;
+    case 3:
+      Serial.println("Red/Magama Planet");
+      break;
+    case 4:
+      Serial.println("Yellow Planet");
+      break;
+    case 5:
+      Serial.println("Magenta Planet");
+       break;
+    case 6:
+      Serial.println("Cyan Planet");
+      break;
+	  case 7:
+	    Serial.println("Plusar");
+       break;
+    default:
+      Serial.println(planettype);
 }
-*/
 
+/*
     // First version of display for the planet color
      if(planettype == 1){
       Serial.println("Green/Habitable Planet");
       }
     if(planettype == 2) {
       Serial.println("Blue/Gas Giant");
-      }/*
+      }
     if(planettype == 3) {
       Serial.println("Red/Magama Planet");
       }
-/*    if(planettype == 4){
+    if(planettype == 4){
       Serial.println("Yellow Planet");
       }
     if(planettype == 5) {
@@ -111,8 +128,10 @@ void loop() {
     if(planettype == 6) {
       Serial.println("Cyan Planet");
       }
-*/
-
+    if(planettype == 7) {
+      Serial.println("Pulsar");
+      }
+ */
   delay(500);
 
   move_servo(); // call this method to move the servo 180 degrees. It will check for the magma planet on its own.
