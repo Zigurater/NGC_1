@@ -20,7 +20,6 @@ void setup() {
 
   // enable color sensing mode
   apds.enableColor(true);
-  moving = false;
 }
 void loop() {
   /*if (){
@@ -53,51 +52,43 @@ void loop() {
     Serial.println(c);
     Serial.println();
 */
-    if ((c > 100) && (counter < 1))
-      {sTime1 = millis();
-      counter = counter + 1;
-      }
+   if ((c > 100) && (counter < 1)){
+    counter = counter + 1;
+      // sTime1 = millis(); 
+   }
 
-   if ((c < 100) && (counter == 1))
-     { eTime1 = millis();
-      counter = counter + 1;
-         P1 = (eTime1 - sTime1) ;
-     /* Serial.println("Period is ");
+   if ((c < 100) && (counter == 1)){
+    counter = counter + 1;
+   /* eTime1 = millis();
+      P1 = (eTime1 - sTime1);
+      Serial.println("Period is ");
       Serial.println(P1);
       Serial.println(eTime1);
       Serial.println(sTime1);
-     }
-     */
-     }
+   */
+   }
+   
    if ((c > 100) && (counter == 2)){
       sTime2 = millis();
       counter = counter + 1;
    }
 
    if ((c < 100) && (counter == 3)){
-     eTime2 = millis();
-     counter = counter + 1;
-         P2 = (eTime2 - sTime2) ;
-               Serial.println("Period is ");
-      if ((975 < P2) && (P2 < 1025))
-      {
+    eTime2 = millis();
+    counter = counter + 1;
+    P2 = (eTime2 - sTime2);
+    Serial.println("Period is ");
+    if ((975 < P2) && (P2 < 1025)){
       Serial.println("1 Hz");
-        }
-      else if((475 < P2) && (P2 < 525))
-     {
+    }else if((475 < P2) && (P2 < 525)){
       Serial.println("2 Hz");
-    }
-        else if((1975 < P2) && (P2 < 2025))
-      {
+    }else if((1975 < P2) && (P2 < 2025)){
       Serial.println(".5 Hz");
-      
-     }
-         else if((625 < P2) && (P2 < 685))
-    {
+    }else if((625 < P2) && (P2 < 685)){
       Serial.println("1.5 Hz");
+    }else{
+      Serial.println(1/(P2/1000) && " Hz");
     }
-     }
+  }
       
-      
-
-     }
+}

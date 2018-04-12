@@ -1,8 +1,11 @@
 #include "Adafruit_APDS9960.h"
 Adafruit_APDS9960 apds;
+#include <Servo.h>
 
 int planettype;
-bool moving;
+int pos;
+Servo myservo;  // create servo object to control a servo
+
 
 void setup() {
     Serial.begin(115200);
@@ -13,13 +16,10 @@ void setup() {
 
   // enable color sensing mode
   apds.enableColor(true);
-  moving = false;
+  myservo.attach(9);  // attaches the servo on pin 9 to the servo object
 }
+
 void loop() {
-  /*if (){
-    moving = true
-  }
-  */
     // create some variables to store the color data in
     uint16_t r, g, b, c;
     
@@ -31,7 +31,7 @@ void loop() {
     // get the data and print the different channels
 
     apds.getColorData(&r, &g, &b, &c);
-/*
+
     Serial.print("red: ");
     Serial.print(r);
     
@@ -44,18 +44,21 @@ void loop() {
     Serial.print(" clear: ");
     Serial.println(c);
     Serial.println();
-*/
+}
+/*
+ 
+ */
 // Values tested with Chris' phone at full brightness with colored folders
 
-    if((g > 40) && (r < 370) && (b < 150)){ // These lines check the light values and sets a variable to a value based on the light values
-      planettype = 1;
-      }
-    if((b > 25) && (r < 370) && (g < 165)) {
-      planettype = 2;
-      }
-    if((r > 140) && (b < 400) && (g <165)) {
-      planettype = 3;
-      }
+ //   if((g > 40) && (r < 370) && (b < 150)){ // These lines check the light values and sets a variable to a value based on the light values
+ //     planettype = 1;
+   //   }
+  //  if((b > 25) && (r < 370) && (g < 165)) {
+    //  planettype = 2;
+   //   }
+   // if((r > 140) && (b < 400) && (g <165)) {
+    //  planettype = 3;
+     // }
 /*
    if((g > 999) && (r < 999) && (b < 999)){
       planettype = 4;
@@ -66,15 +69,9 @@ void loop() {
     if((r > 999) && (b > 999) && (g > 999)) {
       planettype = 6;
       }
-
-    if((g > 800) && (r > 800) && (b > 800)) {
-      plusar();
-      planettype = 7;
-  }
 */
-
 // Second Version of display for the planet color
-
+/*
   switch(planettype){ //Each line will check for a different case of the variable planttype and display based on that value
     case 1:Serial.println("Green/Habitable Planet");
     case 2:Serial.println("Blue/Gas Giant");
@@ -82,8 +79,8 @@ void loop() {
     case 4:Serial.println("Yellow Planet");
     case 5:Serial.println("Magenta Planet");
     case 6:Serial.println("Cyan Planet");
-//    case 7:Serial.println("Plusar with a frequency of" F)
-}
+*/  
+ 
 /*
     // First version of display for the planet color
      if(planettype == 1){
@@ -104,8 +101,24 @@ void loop() {
     if(planettype == 6) {
       Serial.println("Cyan Planet");
       }
-*/
 
-  delay(500);
+
+  delay(150);
+
+  move_servo(); // call this method to move the servo 180 degrees. It will check for the magma planet on its own.
 }
+
+void move_servo(){
+  if (planettype == 3) {
+    pos = 180;
+    delay (1000);
+      for (pos = 180; pos >= 0; pos -= 1) { // goes from 0 degrees to 180 degrees
+      // in steps of 1 degree
+      myservo.write(pos);       // tell servo to go to position in variable 'pos'
+      delay(10);             // waits 15ms for the servo to reach the position
+      }
+  }
+}
+*/
 // End of RGB code
+// Start of Pulsar Code

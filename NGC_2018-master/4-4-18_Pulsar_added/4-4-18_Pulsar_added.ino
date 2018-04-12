@@ -1,6 +1,10 @@
 #include "Adafruit_APDS9960.h"
+#include <Adafruit_NeoPixel.h>
 Adafruit_APDS9960 apds;
 #include <Servo.h>
+#define PIN            4
+#define NUMPIXELS      8
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 int counter = 0;
 unsigned long sTime1;
@@ -10,7 +14,7 @@ unsigned long eTime2;
 unsigned long P1;
 unsigned long P2;
 int planettype;
-int pos;
+int pos = 180;
 int F;
 bool moving;
 bool pulsar_value;
@@ -22,12 +26,14 @@ void setup() {
     Serial.println("failed to initialize device! Please check your wiring.");
   }
   else Serial.println("Device initialized!");
-
+  strip.begin(); // This initializes the NeoPixel library.
   // enable color sensing mode
   apds.enableColor(true);
   myservo.attach(9);  // attaches the servo on pin 9 to the servo object
-  pos = 180;
   //moving = false;
+  
+             strip.show();
+  
   //pulsar_value = wait_for_on; // What is this line supposed to do? Wait_For_On was declared as a method in the bottom. Were you intending for wait_for_one to return a boolean? You'll want to include a "()" in there if it is. -AR
 }
 void loop() {
@@ -93,21 +99,72 @@ void loop() {
   switch(planettype){ //Each line will check for a different case of the variable planttype and display based on that value
     case 1:
       Serial.println("Green/Habitable Planet");
+         strip.setPixelColor(0, 0, 255, 0);
+                strip.setPixelColor(1, 0, 255, 0);
+                strip.setPixelColor(2, 0, 255, 0);
+                strip.setPixelColor(3, 0, 255, 0);
+                strip.setPixelColor(4, 0, 255, 0);
+                strip.setPixelColor(5, 0, 255, 0);
+                strip.setPixelColor(6, 0, 255, 0);
+                strip.setPixelColor(7, 0, 255, 0);
+             strip.show();
       break;
     case 2:
       Serial.println("Blue/Gas Giant");
+       strip.setPixelColor(0, 0, 0, 255);
+                strip.setPixelColor(1, 0, 0, 255);
+                strip.setPixelColor(2, 0, 0, 255);
+                strip.setPixelColor(3, 0, 0, 255);
+                strip.setPixelColor(4, 0, 0, 255);
+                strip.setPixelColor(5, 0, 0, 255);
+                strip.setPixelColor(6, 0, 0, 255);
+                strip.setPixelColor(7, 0, 0, 255);
+             strip.show();
       break;
     case 3:
       Serial.println("Red/Magama Planet");
+       strip.setPixelColor(0, 255, 0, 0);
+                strip.setPixelColor(1, 255, 0, 0);
+                strip.setPixelColor(2, 255, 0, 0);
+                strip.setPixelColor(3, 255, 0,0);
+                strip.setPixelColor(4, 255, 0, 0);
+                strip.setPixelColor(5, 255, 0, 0);
+                strip.setPixelColor(6, 255, 0, 0);
+                strip.setPixelColor(7, 255, 0, 0);
+             strip.show();
       break;
     case 4:
       Serial.println("Yellow Planet");
+       strip.setPixelColor(0, 255, 255 ,0);
+                strip.setPixelColor(1, 255, 255,0 );
+                strip.setPixelColor(2, 255, 255,0);
+                strip.setPixelColor(3, 255,255,0);
+                strip.setPixelColor(4, 255, 255,0);
+                strip.setPixelColor(5, 255, 255,0);
+                strip.setPixelColor(6, 255, 255,0);
+                strip.setPixelColor(7, 255,  255,0);
       break;
     case 5:
       Serial.println("Magenta Planet");
-       break;
+       strip.setPixelColor(0, 255, 0, 255);
+                strip.setPixelColor(1, 255, 0, 255);
+                strip.setPixelColor(2, 255, 0, 255);
+                strip.setPixelColor(3, 255, 0,255);
+                strip.setPixelColor(4, 255, 0, 255);
+                strip.setPixelColor(5, 255, 0, 255);
+                strip.setPixelColor(6, 255, 0, 255);
+                strip.setPixelColor(7, 255, 0, 255);
+      break;
     case 6:
       Serial.println("Cyan Planet");
+       strip.setPixelColor(0, 0, 255, 255);
+                strip.setPixelColor(1, 0, 255, 255);
+                strip.setPixelColor(2, 0, 255, 255);
+                strip.setPixelColor(3, 0, 255, 255);
+                strip.setPixelColor(4, 0, 255, 255);
+                strip.setPixelColor(5, 0, 255, 255);
+                strip.setPixelColor(6, 0, 255, 255);
+                strip.setPixelColor(7, 0, 255, 255);
       break;
 	  case 7:
 	    Serial.println("Plusar");
@@ -156,7 +213,15 @@ void loop() {
                 Serial.println("1.5 Hz");
               }
                }
-     
+                strip.setPixelColor(0, 255, 255, 255);
+                strip.setPixelColor(1, 255, 255, 255);
+                strip.setPixelColor(2, 255, 255, 255);
+                strip.setPixelColor(3, 255, 255, 255);
+                strip.setPixelColor(4, 255, 255, 255);
+                strip.setPixelColor(5, 255, 255, 255);
+                strip.setPixelColor(6, 255, 255, 255);
+                strip.setPixelColor(7, 255, 255, 255);
+             strip.show();
        break;
     default:
       Serial.println(planettype);
@@ -194,7 +259,7 @@ void loop() {
 void move_servo(){
   if (planettype == 3) {
     delay (1000);
-      for (pos = 200; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
+      for (pos = 180; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
       // in steps of 1 degree
       myservo.write(pos);       // tell servo to go to position in variable 'pos'
       delay(8);
