@@ -69,10 +69,10 @@ int 6g = 3;
 int 6b = 7;
 int 6c = 44;
 
-int 7r = ;
-int 7g = ;
-int 7b = ;
-int 7c = ;
+int 7r = 47;
+int 7g = 65;
+int 7b = 85;
+int 7c = 185;
 
 int 1rg = 1g / 1r;
 int 1rb = 1b / 1r;
@@ -161,7 +161,7 @@ void loop() {
     planettype = 5;
   }else if(((6rg - tolerence) < rg < (6rg + tolerence)) && ((6rb - tolerence) < rb < (6rb + tolerence)) && ((6rc - tolerence) < rc < (6rc + tolerence))){ //red
     planettype = 6;
-  }else if(((7rg - tolerence) < rg < (7rg + tolerence)) && ((7rb - tolerence) < rb < (7rb + tolerence)) && ((7rc - tolerence) < rc < (7rc + tolerence))){ //pulsar: NEED ACTUAL RGB VALUES. ENTER THEM IN THE CALIBRATION VARIABLES ABOVE THIS VOID LOOP.
+  }else if(((7rg - tolerence) < rg < (7rg + tolerence)) && ((7rb - tolerence) < rb < (7rb + tolerence)) && ((7rc - tolerence) < rc < (7rc + tolerence))){ //pulsar
     planettype = 7;
   }
 
