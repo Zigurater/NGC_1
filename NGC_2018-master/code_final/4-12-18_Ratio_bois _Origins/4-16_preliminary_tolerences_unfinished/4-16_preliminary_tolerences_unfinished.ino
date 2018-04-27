@@ -21,9 +21,21 @@ bool pulsar_value;
 Servo myservo;  // create servo object to control a servo'
 bool deployed;
 
+
 //variables for "ratio green" and "ratio blue" values:
 int rg;
 int rb;
+int rc;
+
+//tolerence variables to make testing easier
+int rgh;
+int rgl;
+int rbh;
+int rbl;
+int rch;
+int rcl;
+int tolerence = 5;
+
 
 void setup() {
     Serial.begin(115200);
@@ -44,27 +56,59 @@ void setup() {
   
   //pulsar_value = wait_for_on; // What is this line supposed to do? Wait_For_On was declared as a method in the bottom. Were you intending for wait_for_one to return a boolean? You'll want to include a "()" in there if it is. -AR
 }
-void loop() {
- 
-    // create some variables to store the color data in
-    uint16_t r, g, b, c;
+
+void loop() {  
+  // create some variables to store the color data in
+  uint16_t r, g, b, c;
+  
+  // wait for color data to be ready
+  while(!apds.colorDataReady()){
+    delay(5);
+  }
+  
+  // get the data and print the different channels
+  
+  apds.getColorData(&r, &g, &b, &c);
+   
+  //"ratio green" and "ratio blue" are unit ratios to the red value
+  rg = g / r;
+  rb = b / r;
+  rc = c / r;
+  Serial.println("r:g:b:c = ");
+  Serial.print(1);
+  Serial.print(":");
+  Serial.print(rg);
+  Serial.print(":");
+  Serial.print(rb);
+  Serial.print(":");
+  Serial.print(rc);
+  Serial.println("tolerence radius: ");
+  Serial.print(tolerence);
+  
+  //cyan (5,46,45,95) -> (1, 9.2, 9, 19)
+  //yellow (43,38,30,104) -> (1, 0.8837, 0.625, 2.4186)
+  //magenta (41,24,75,132) -> (1, 0.5854, 1.8293, 3.2195)
+  //green (5,46,32,65) -> (1, 9.2, 6.4, 13)
+  //blue (2,26,87,112) -> (1, 13, 43.5, 56)
+  //red (43,3,7,44) -> (1, 0.0698, 0.1628, 1.0232)
+  //pulsar (uh oh no values) -> ( :P )
+  
+  if(((9.2-tolerence) < rg < (9.2+tolerence)) && ){ //cyan
     
-    // wait for color data to be ready
-    while(!apds.colorDataReady()){
-      delay(5);
-    }
-
-    // get the data and print the different channels
-
-    apds.getColorData(&r, &g, &b, &c);
-
-    rg = g / r;
-    rb = b / r;
-
-    Serial.print("r:g:b");
-    Serial.print(1 " : " rg " : " rb);
-
+  }else if(){ //yellow
     
+  }else if(){ //magenta
+    
+  }else if(){ //green
+    
+  }else if(){ //blue
+    
+  }else if(){ //red
+    
+  }else if(){ //pulsar
+    
+  }
+  
 }
 
 

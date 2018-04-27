@@ -1,4 +1,4 @@
-n #include "Adafruit_APDS9960.h"
+     #include "Adafruit_APDS9960.h"
 #include <Adafruit_NeoPixel.h>
 Adafruit_APDS9960 apds;
 #include <Servo.h>
@@ -6,7 +6,7 @@ Adafruit_APDS9960 apds;
 #define NUMPIXELS      8
 #define INT_PIN 3
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
-
+int Hz;
 int counter = 1;
 unsigned long sTime1;
 unsigned long sTime2;
@@ -17,8 +17,10 @@ unsigned long P2;
 int planettype;
 int pos;
 int F;
+//int counter = 0;
+int dRate= 1000;
 unsigned char proximity;
-bool wormhole;
+bool wormhole= false;
 bool pulsar_value;
 Servo myservo;  // create servo object to control a servo'
 bool deployed;
@@ -58,18 +60,24 @@ void loop() {
 
     
     
-  //  proximity= apds.readProximity;
+ //    proximity= apds.readProximity;
     
-    Serial.print("proximity: ");
-    Serial.print(apds.readProximity());
-//if(proximity < )
+    Serial.println("proximity: ");
+    Serial.println(apds.readProximity());
+
+
+if(apds.readProximity() ==1 )
 {
   wormhole= true;
-
-
 }
 
-    if (wormhole= true)
+if ( apds.readProximity() > 5)
+{
+  wormhole= false;
+  delay(500);
+}
+
+    if (wormhole == true)
     {
     apds.getColorData(&r, &g, &b, &c);
     Serial.print("red: ");
@@ -84,7 +92,7 @@ void loop() {
     Serial.print(" clear: ");
     Serial.println(c);
     Serial.println();
-    }
+    
 // These lines check the light values and sets a variable to a value based on the light values
 // Values tested with Chris' phone at full brightness with colored folders
 // Now testing with big boy lights in the tunnel
@@ -123,81 +131,81 @@ void loop() {
       planettype = 7;
       //()
     }
-
+    }
 // Second Version of display for the planet color
 
   switch(planettype){ //Each line will check for a different case of the variable planttype and display based on that value
     case 1:
        Serial.println("Cyan Planet");
-       strip.setPixelColor(0, 0, 255, 255);
-                strip.setPixelColor(1, 0, 255, 255);
-                strip.setPixelColor(2, 0, 255, 255);
-                strip.setPixelColor(3, 0, 255, 255);
-                strip.setPixelColor(4, 0, 255, 255);
-//                strip.setPixelColor(5, 0, 255, 255);
-//                strip.setPixelColor(6, 0, 255, 255);
-//                strip.setPixelColor(7, 0, 255, 255);
+                strip.setPixelColor(0, 0, 255, 255);
+                strip.setPixelColor(1, 0, 0, 0);
+                strip.setPixelColor(2, 0, 0, 0);
+                strip.setPixelColor(3, 0, 0, 0);
+                strip.setPixelColor(4, 0, 0, 0);
+                strip.setPixelColor(5, 0, 0, 0);
+                strip.setPixelColor(6, 0, 0, 0);
+                strip.setPixelColor(7, 0, 0, 0);
            strip.show();
            delay(3000);
       break;
     case 2:
       Serial.println("Blue/Gas Giant");
-       strip.setPixelColor(0, 0, 0, 255);
+                strip.setPixelColor(0, 0, 0, 0);
                 strip.setPixelColor(1, 0, 0, 255);
-                strip.setPixelColor(2, 0, 0, 255);
-                strip.setPixelColor(3, 0, 0, 255);
-                strip.setPixelColor(4, 0, 0, 255);
-                strip.setPixelColor(5, 0, 0, 255);
-                strip.setPixelColor(6, 0, 0, 255);
-                strip.setPixelColor(7, 0, 0, 255);
+                strip.setPixelColor(2, 0, 0, 0);
+                strip.setPixelColor(3, 0, 0, 0);
+                strip.setPixelColor(4, 0, 0, 0);
+                strip.setPixelColor(5, 0, 0, 0);
+                strip.setPixelColor(6, 0, 0, 0);
+                strip.setPixelColor(7, 0, 0, 0);
              strip.show();
       break;
     case 3:
       Serial.println("Red/Magama Planet");
-       strip.setPixelColor(0, 255, 0, 0);
-                strip.setPixelColor(1, 255, 0, 0);
+                strip.setPixelColor(0, 0, 0, 0);
+                strip.setPixelColor(1, 0, 0, 0);
                 strip.setPixelColor(2, 255, 0, 0);
-                strip.setPixelColor(3, 255, 0, 0);
-                strip.setPixelColor(4, 255, 0, 0);
-                strip.setPixelColor(5, 255, 0, 0);
-                strip.setPixelColor(6, 255, 0, 0);
-                strip.setPixelColor(7, 255, 0, 0);
+                strip.setPixelColor(3, 0, 0, 0);
+                strip.setPixelColor(4, 0, 0, 0);
+                strip.setPixelColor(5, 0, 0, 0);
+                strip.setPixelColor(6, 0, 0, 0);
+                strip.setPixelColor(7, 0, 0, 0);
              strip.show();
       break;
     case 4:
       Serial.println("Yellow Planet");
-       strip.setPixelColor(0, 255, 255 ,0);
-                strip.setPixelColor(1, 255, 255,0 );
-                strip.setPixelColor(2, 255, 255,0);
-                strip.setPixelColor(3, 255,255,0);
-                strip.setPixelColor(4, 255, 255,0);
- //               strip.setPixelColor(5, 255, 255,0);
-//               strip.setPixelColor(6, 255, 255,0);
- //               strip.setPixelColor(7, 255,  255,0);
+                strip.setPixelColor(0, 0, 0 ,0);
+                strip.setPixelColor(1, 0, 0, 0 );
+                strip.setPixelColor(2, 0, 0, 0);
+                strip.setPixelColor(3, 255, 255, 0);
+                strip.setPixelColor(4, 0, 0, 0);
+                strip.setPixelColor(5, 0, 0, 0);
+                strip.setPixelColor(6, 0, 0, 0);
+                strip.setPixelColor(7, 0, 0, 0);
           strip.show();
       break;
     case 5:
       Serial.println("Magenta Planet");
-       strip.setPixelColor(0, 255, 0, 255);
-                strip.setPixelColor(1, 255, 0, 255);
-                strip.setPixelColor(2, 255, 0, 255);
-                strip.setPixelColor(3, 255, 0,255);
+                strip.setPixelColor(0, 0, 0, 0);
+                strip.setPixelColor(1, 0, 0, 0);
+                strip.setPixelColor(2, 0, 0, 0);
+                strip.setPixelColor(3, 0, 0, 0);
                 strip.setPixelColor(4, 255, 0, 255);
-                strip.setPixelColor(5, 255, 0, 255);
-                strip.setPixelColor(6, 255, 0, 255);
-                strip.setPixelColor(7, 255, 0, 255);
+                strip.setPixelColor(5, 0, 0, 0);
+                strip.setPixelColor(6, 0, 0, 0);
+                strip.setPixelColor(7, 0, 0, 0);
                 strip.show();
       break;
     case 6:
      Serial.println("Green/Habitable Planet");
-         strip.setPixelColor(0, 0, 255, 0);
-                strip.setPixelColor(1, 0, 255, 0);
-                strip.setPixelColor(2, 0, 255, 0);
-                strip.setPixelColor(3, 0, 255, 0);
-                strip.setPixelColor(4, 0, 255, 0);
+                strip.setPixelColor(0, 0, 0, 0);
+                strip.setPixelColor(1, 0, 0, 0);
+                strip.setPixelColor(2, 0, 0, 0);
+                strip.setPixelColor(3, 0, 0, 0);
+                strip.setPixelColor(4, 0, 0, 0);
                 strip.setPixelColor(5, 0, 255, 0);
-                strip.setPixelColor(6, 0, 255, 0);
-                strip.setPixelColor(7, 0, 255, 0);
+                strip.setPixelColor(6, 0, 0, 0);
+                strip.setPixelColor(7, 0, 0, 0);
              strip.show();
       break;
 	  case 7:
@@ -229,20 +237,20 @@ void loop() {
         Serial.println(1/(P2/1000) && " Hz");
       }
     }
-                strip.setPixelColor(0, 255, 255, 255);
-                strip.setPixelColor(1, 255, 255, 255);
-                strip.setPixelColor(2, 255, 255, 255);
-                strip.setPixelColor(3, 255, 255, 255);
-                strip.setPixelColor(4, 255, 255, 255);
-                strip.setPixelColor(5, 255, 255, 255);
+                strip.setPixelColor(0, 0, 0, 0);
+                strip.setPixelColor(1, 0, 0, 0);
+                strip.setPixelColor(2, 0, 0, 0);
+                strip.setPixelColor(3, 0, 0, 0);
+                strip.setPixelColor(4, 0, 0, 0);
+                strip.setPixelColor(5, 0, 0, 0);
                 strip.setPixelColor(6, 255, 255, 255);
-                strip.setPixelColor(7, 255, 255, 255);
+                strip.setPixelColor(7, 0, 0, 0);
              strip.show();
        break;
     default:
       Serial.println(planettype);
 }
-
+    
   move_servo(); // call this method to move the servo 180 degrees. It will check for the magma planet on its own.
   //plusar(); // call this to calculate the frequency of the pulsar.
 }
@@ -263,15 +271,9 @@ void move_servo(){
     myservo.writeMicroseconds(750);
     deployed = true;
    }
-
-    //print the proximity reading when the interrupt pin goes low
-  if(!digitalRead(INT_PIN)){
-    Serial.println(apds.readProximity());
-
-    //clear the interrupt
-    apds.clearInterrupt();
-  }
 }
+
+
   
 // End of RGB code
 

@@ -1,4 +1,4 @@
-n #include "Adafruit_APDS9960.h"
+#include "Adafruit_APDS9960.h"
 #include <Adafruit_NeoPixel.h>
 Adafruit_APDS9960 apds;
 #include <Servo.h>
@@ -7,18 +7,21 @@ Adafruit_APDS9960 apds;
 #define INT_PIN 3
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
-int counter = 1;
-unsigned long sTime1;
+//pulsar variables (this code concept comes from "Pulsar_test_code.ino" in the "color strip test" folder)
+int Hz;
+int dRate;
+int showstart;
+int secondsshowing = 5;
 unsigned long sTime2;
-unsigned long eTime1;
 unsigned long eTime2;
-unsigned long P1;
 unsigned long P2;
+
+int counter = 1;
 int planettype;
 int pos;
 int F;
 unsigned char proximity;
-bool wormhole;
+bool wormhole = false;
 bool pulsar_value;
 Servo myservo;  // create servo object to control a servo'
 bool deployed;
@@ -42,7 +45,7 @@ void setup() {
   
              strip.show();
   
-  //pulsar_value = wait_for_on; // What is this line supposed to do? Wait_For_On was declared as a method in the bottom. Were you intending for wait_for_one to return a boolean? You'll want to include a "()" in there if it is. -AR
+
 }
 void loop() {
  
@@ -54,23 +57,26 @@ void loop() {
       delay(5);
     }
 
-    // get the data and print the different channels
+   // get the data and print the different channels
 
     
     
-  //  proximity= apds.readProximity;
+   //proximity = apds.readProximity;
     
-    Serial.print("proximity: ");
-    Serial.print(apds.readProximity());
-//if(proximity < )
-{
+    Serial.println("proximity: ");
+    Serial.println(apds.readProximity());
+
+
+if(apds.readProximity() ==1 ){
   wormhole= true;
-
-
 }
 
-    if (wormhole= true)
-    {
+if ( apds.readProximity() > 5){
+  wormhole= false;
+  delay(500);
+}
+
+  if (wormhole == true){
     apds.getColorData(&r, &g, &b, &c);
     Serial.print("red: ");
     Serial.print(r);
@@ -84,7 +90,7 @@ void loop() {
     Serial.print(" clear: ");
     Serial.println(c);
     Serial.println();
-    }
+    
 // These lines check the light values and sets a variable to a value based on the light values
 // Values tested with Chris' phone at full brightness with colored folders
 // Now testing with big boy lights in the tunnel
@@ -123,81 +129,81 @@ void loop() {
       planettype = 7;
       //()
     }
-
+    }
 // Second Version of display for the planet color
 
   switch(planettype){ //Each line will check for a different case of the variable planttype and display based on that value
     case 1:
        Serial.println("Cyan Planet");
-       strip.setPixelColor(0, 0, 255, 255);
-                strip.setPixelColor(1, 0, 255, 255);
-                strip.setPixelColor(2, 0, 255, 255);
-                strip.setPixelColor(3, 0, 255, 255);
-                strip.setPixelColor(4, 0, 255, 255);
-//                strip.setPixelColor(5, 0, 255, 255);
-//                strip.setPixelColor(6, 0, 255, 255);
-//                strip.setPixelColor(7, 0, 255, 255);
+                strip.setPixelColor(0, 0, 255, 255);
+                strip.setPixelColor(1, 0, 0, 0);
+                strip.setPixelColor(2, 0, 0, 0);
+                strip.setPixelColor(3, 0, 0, 0);
+                strip.setPixelColor(4, 0, 0, 0);
+                strip.setPixelColor(5, 0, 0, 0);
+                strip.setPixelColor(6, 0, 0, 0);
+                strip.setPixelColor(7, 0, 0, 0);
            strip.show();
            delay(3000);
       break;
     case 2:
       Serial.println("Blue/Gas Giant");
-       strip.setPixelColor(0, 0, 0, 255);
+                strip.setPixelColor(0, 0, 0, 0);
                 strip.setPixelColor(1, 0, 0, 255);
-                strip.setPixelColor(2, 0, 0, 255);
-                strip.setPixelColor(3, 0, 0, 255);
-                strip.setPixelColor(4, 0, 0, 255);
-                strip.setPixelColor(5, 0, 0, 255);
-                strip.setPixelColor(6, 0, 0, 255);
-                strip.setPixelColor(7, 0, 0, 255);
+                strip.setPixelColor(2, 0, 0, 0);
+                strip.setPixelColor(3, 0, 0, 0);
+                strip.setPixelColor(4, 0, 0, 0);
+                strip.setPixelColor(5, 0, 0, 0);
+                strip.setPixelColor(6, 0, 0, 0);
+                strip.setPixelColor(7, 0, 0, 0);
              strip.show();
       break;
     case 3:
       Serial.println("Red/Magama Planet");
-       strip.setPixelColor(0, 255, 0, 0);
-                strip.setPixelColor(1, 255, 0, 0);
+                strip.setPixelColor(0, 0, 0, 0);
+                strip.setPixelColor(1, 0, 0, 0);
                 strip.setPixelColor(2, 255, 0, 0);
-                strip.setPixelColor(3, 255, 0, 0);
-                strip.setPixelColor(4, 255, 0, 0);
-                strip.setPixelColor(5, 255, 0, 0);
-                strip.setPixelColor(6, 255, 0, 0);
-                strip.setPixelColor(7, 255, 0, 0);
+                strip.setPixelColor(3, 0, 0, 0);
+                strip.setPixelColor(4, 0, 0, 0);
+                strip.setPixelColor(5, 0, 0, 0);
+                strip.setPixelColor(6, 0, 0, 0);
+                strip.setPixelColor(7, 0, 0, 0);
              strip.show();
       break;
     case 4:
       Serial.println("Yellow Planet");
-       strip.setPixelColor(0, 255, 255 ,0);
-                strip.setPixelColor(1, 255, 255,0 );
-                strip.setPixelColor(2, 255, 255,0);
-                strip.setPixelColor(3, 255,255,0);
-                strip.setPixelColor(4, 255, 255,0);
- //               strip.setPixelColor(5, 255, 255,0);
-//               strip.setPixelColor(6, 255, 255,0);
- //               strip.setPixelColor(7, 255,  255,0);
+                strip.setPixelColor(0, 0, 0 ,0);
+                strip.setPixelColor(1, 0, 0, 0 );
+                strip.setPixelColor(2, 0, 0, 0);
+                strip.setPixelColor(3, 255, 255, 0);
+                strip.setPixelColor(4, 0, 0, 0);
+                strip.setPixelColor(5, 0, 0, 0);
+                strip.setPixelColor(6, 0, 0, 0);
+                strip.setPixelColor(7, 0, 0, 0);
           strip.show();
       break;
     case 5:
       Serial.println("Magenta Planet");
-       strip.setPixelColor(0, 255, 0, 255);
-                strip.setPixelColor(1, 255, 0, 255);
-                strip.setPixelColor(2, 255, 0, 255);
-                strip.setPixelColor(3, 255, 0,255);
+                strip.setPixelColor(0, 0, 0, 0);
+                strip.setPixelColor(1, 0, 0, 0);
+                strip.setPixelColor(2, 0, 0, 0);
+                strip.setPixelColor(3, 0, 0, 0);
                 strip.setPixelColor(4, 255, 0, 255);
-                strip.setPixelColor(5, 255, 0, 255);
-                strip.setPixelColor(6, 255, 0, 255);
-                strip.setPixelColor(7, 255, 0, 255);
+                strip.setPixelColor(5, 0, 0, 0);
+                strip.setPixelColor(6, 0, 0, 0);
+                strip.setPixelColor(7, 0, 0, 0);
                 strip.show();
       break;
     case 6:
      Serial.println("Green/Habitable Planet");
-         strip.setPixelColor(0, 0, 255, 0);
-                strip.setPixelColor(1, 0, 255, 0);
-                strip.setPixelColor(2, 0, 255, 0);
-                strip.setPixelColor(3, 0, 255, 0);
-                strip.setPixelColor(4, 0, 255, 0);
+                strip.setPixelColor(0, 0, 0, 0);
+                strip.setPixelColor(1, 0, 0, 0);
+                strip.setPixelColor(2, 0, 0, 0);
+                strip.setPixelColor(3, 0, 0, 0);
+                strip.setPixelColor(4, 0, 0, 0);
                 strip.setPixelColor(5, 0, 255, 0);
-                strip.setPixelColor(6, 0, 255, 0);
-                strip.setPixelColor(7, 0, 255, 0);
+                strip.setPixelColor(6, 0, 0, 0);
+                strip.setPixelColor(7, 0, 0, 0);
              strip.show();
       break;
 	  case 7:
@@ -217,65 +223,83 @@ void loop() {
       counter = counter + 1;
       P2 = (eTime2 - sTime2);
       Serial.println("Period is ");
+      
       if ((975 < P2) && (P2 < 1025)){
         Serial.println("1 Hz");
+        Hz = 1;
       }else if((475 < P2) && (P2 < 525)){
         Serial.println("2 Hz");
+        Hz = 2;
       }else if((1975 < P2) && (P2 < 2025)){
         Serial.println(".5 Hz");
+        Hz = 0.5;
       }else if((625 < P2) && (P2 < 685)){
         Serial.println("1.5 Hz");
+        Hz = 1.5;
       }else{
         Serial.println(1/(P2/1000) && " Hz");
       }
+      
+      if (Hz == 0.5) {
+        dRate = 2000;
+      }
+      else if (Hz == 1) {
+        dRate = 1000;
+      } 
+      else if (Hz == 1.5) {
+        dRate = 666;
+      } 
+      else if (Hz == 2) {
+        dRate = 500;
+      }
+      showstart = millis();
+      pulsar();
+      if((millis() - showstart) >= (secondsshowing * 1000)){
+        break;
+      }
     }
-                strip.setPixelColor(0, 255, 255, 255);
-                strip.setPixelColor(1, 255, 255, 255);
-                strip.setPixelColor(2, 255, 255, 255);
-                strip.setPixelColor(3, 255, 255, 255);
-                strip.setPixelColor(4, 255, 255, 255);
-                strip.setPixelColor(5, 255, 255, 255);
-                strip.setPixelColor(6, 255, 255, 255);
-                strip.setPixelColor(7, 255, 255, 255);
-             strip.show();
-       break;
-    default:
-      Serial.println(planettype);
-}
-
+  }
+    
   move_servo(); // call this method to move the servo 180 degrees. It will check for the magma planet on its own.
-  //plusar(); // call this to calculate the frequency of the pulsar.
 }
 
 void move_servo(){
-  /*if (planettype == 3 && deployed = false) {
-    delay (1000);
-      for (pos = 200; pos >= 0; pos -= 1) { // goes from 180 degrees to 0 degrees
-      // in steps of 1 degree
-      myservo.write(pos);       // tell servo to go to position in variable 'pos'
-      delay(8);
-      }
-      deployed = true;     
-      }
-      */
-
    if (planettype == 3 && deployed == false){
     myservo.writeMicroseconds(750);
     deployed = true;
    }
+}
 
-    //print the proximity reading when the interrupt pin goes low
-  if(!digitalRead(INT_PIN)){
-    Serial.println(apds.readProximity());
-
-    //clear the interrupt
-    apds.clearInterrupt();
+    
+void pulsar() {
+  if(showstart > 0){
+    strip.setPixelColor(0, 0, 0, 0);
+    strip.setPixelColor(1, 0, 0, 0);
+    strip.setPixelColor(2, 0, 0, 0);
+    strip.setPixelColor(3, 0, 0, 0);
+    strip.setPixelColor(4, 0, 0, 0);
+    strip.setPixelColor(5, 0, 0, 0);
+    strip.setPixelColor(6, 255, 255, 255);
+    strip.setPixelColor(7, 0, 0, 0);
+    
+    strip.show();
+    delay(dRate);
+    
+    strip.setPixelColor(0, 0, 0, 0);
+    strip.setPixelColor(1, 0, 0, 0);
+    strip.setPixelColor(2, 0, 0, 0);
+    strip.setPixelColor(3, 0, 0, 0);
+    strip.setPixelColor(4, 0, 0, 0);
+    strip.setPixelColor(5, 0, 0, 0);
+    strip.setPixelColor(6, 0, 0, 0);
+    strip.setPixelColor(7, 0, 0, 0);
+    
+    strip.show();
+    delay(dRate);
   }
 }
   
 // End of RGB code
-
-// Start of Pulsar Code
 
 // What the Pulsar code needs to do
 // 1) Read bright white light values
@@ -288,19 +312,4 @@ void move_servo(){
 // 8) Add up values from second timer and divide by number of trials
 // 9) Add up these averages
 // 10) Divide 1 by that value to obtain frequency
-/*
-void plusar(){
-  while (!moving){
-    if (planettype == 7){
-    wait_for_on() // Where is this method defined? -AR
-    }
-    if (pulsar_value){
-      //write time value to something
-      wait_for_off() // Where is this method defined? -AR
-    }
-    if (moving){
-      break;
-    }
-    }
-    }
-*/
+

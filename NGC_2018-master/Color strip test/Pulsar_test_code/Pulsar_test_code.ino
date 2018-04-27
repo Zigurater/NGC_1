@@ -1,6 +1,5 @@
 #include <Adafruit_NeoPixel.h>
-int counter = 0;
-int dRate= 1000;
+
 #define PIN 6
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(8, 6, NEO_GRB + NEO_KHZ800);
 void setup() {
@@ -20,11 +19,14 @@ void setup() {
 }
 
 
-//Declare desired frequency:
+//Declare desired frequency to flash RGB:
 int Hz = 1;
+int counter = 0;
+int dRate;
+int showstart;
+int secondsshowing = 4;
 
-
-/*if (Hz == 0.5) {
+if (Hz == 0.5) {
   dRate = 2000;
 }
 else if (Hz == 1) {
@@ -37,15 +39,12 @@ else if (Hz == 2) {
   dRate = 500;
 }
 
-*/
+showstart = millis();
 void loop() {
-  
-  if (counter == 5)
-  {
+  if (counter == 5){
     delay(5 * dRate);
-  counter=0;
+    counter = 0;
   }
-  
     // put your main code here, to run repeatedly:
   strip.setPixelColor(0, 255, 255, 255);
   strip.setPixelColor(1, 255, 255, 255);
@@ -71,5 +70,8 @@ void loop() {
   
   strip.show();
   delay(dRate);
-  
+
+  if((millis() - showstart) >= (secondsshowing * 1000)){
+    break;
+  }
 }
