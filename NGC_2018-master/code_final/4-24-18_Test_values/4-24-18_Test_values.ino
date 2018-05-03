@@ -54,11 +54,11 @@ void loop() {
     Serial.println("proximity: ");
     Serial.println(apds.readProximity());
   if(apds.readProximity() ==1 ){
-     wormhole= true;
+     wormhole = true;
      }
 
   if ( apds.readProximity() > 5){
-    wormhole= false;
+    wormhole = false;
     delay(500);
   }
 
